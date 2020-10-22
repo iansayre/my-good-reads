@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getBooksByType } from "./book-search.service";
+import { Book } from '../Book';
 
 
 const BookSearch = () => {
@@ -55,12 +56,24 @@ const BookSearch = () => {
                                     </p>
                                 </div>
                             )}
+                             {bookType && (
+                                <div className=".book--container">
+                                    {
+                                        allAvailableBooks.items.map((book): JSX.Element => {
+                                            const vol = book.volumeInfo;
+                                            return (
+                                                <Book authors={vol.authors} description={vol.description} image={vol.imageLinks.thumbnail} publisher={vol.publisher} publishedDate={vol.publishedDate} title={vol.title}/>
+                                            );
+                                        })
+                                    }
+                                </div>
+                            )}
 
                         </div>
                     </div>
                 </div>
-                {                <pre>{JSON.stringify(allAvailableBooks, null, 4)}</pre>
-                }
+                {/* {                <pre>{JSON.stringify(allAvailableBooks, null, 4)}</pre>
+                } */}
             </>
     );
 };
