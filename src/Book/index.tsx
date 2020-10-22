@@ -15,12 +15,12 @@ const Book = (props: Props) => {
   return (
     <div className="book">
       <img className="img-thumb" src={image} />
-      <h4>{title}</h4>
+      <div className="title">{title}</div>
       <div className="author">
         {authors.map(author => <span>{author}</span>)}
       </div>
-      <div className="publish-container">
-        <span className="publisher">{publisher}</span>
+      <div className="publish--container">
+       {publisher && <span className="publisher">{publisher}</span>}
         <span className="date">{publishedDate}</span>
       </div>
       <p className="desc">{description}</p>

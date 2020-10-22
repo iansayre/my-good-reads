@@ -111,8 +111,14 @@ form {
 }
 .book {
   border: 1px solid silver;
-  padding: 0.5rem;
+  text-align: center;
+  padding: $spacing-xxs;
 }
+
+.desc {
+  font-size: 0.95rem;
+}
+
 .book--container {
   display: flex;
   flex-flow: row nowrap;
@@ -120,12 +126,31 @@ form {
   align-items: stretch;
 }
 
+.title {
+  margin: $spacing-xxs 0;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.author {
+  text-align: left;
+}
+
+.publish--container {
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 0.8rem;
+  font-style: italic;
+  justify-content: space-between;
+  padding: $spacing-xxs 0;
+}
+
 .results--container {
   border: 1px solid silver;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-gap: 1rem;
-  padding: 1rem;
+  grid-gap: $spacing-xs;
+  padding: $spacing-xs;
   width: 75%;
 }
 
