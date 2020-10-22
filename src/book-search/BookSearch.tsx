@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getBooksByType } from "./book-search.service";
+import { AvailableBooks, BooksItem } from './interfaces';
 import { Book } from '../Book';
-
 
 const BookSearch = () => {
     const [bookType, updateBookType] = useState("");
     const [bookTypeToSearch, updateBookTypeToSearch] = useState("");
-    const [allAvailableBooks, setAllAvailableBooks] = useState([]);
+    const [allAvailableBooks, setAllAvailableBooks] = useState<AvailableBooks>();
     async function requestBooks() {
         if (bookTypeToSearch) {
             const allBooks = await getBooksByType(bookTypeToSearch);
@@ -56,10 +56,10 @@ const BookSearch = () => {
                                     </p>
                                 </div>
                             )}
-                             {bookType && (
+                             {allAvailableBooks && (
                                 <div className=".book--container">
                                     {
-                                        allAvailableBooks.items.map((book): JSX.Element => {
+                                        allAvailableBooks.items.map((book: BooksItem): JSX.Element => {
                                             const vol = book.volumeInfo;
                                             return (
                                                 <Book authors={vol.authors} description={vol.description} image={vol.imageLinks.thumbnail} publisher={vol.publisher} publishedDate={vol.publishedDate} title={vol.title}/>

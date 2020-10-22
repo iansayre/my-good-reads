@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface IProps {
+interface Props {
   authors: string[],
   description: string,
   image: string,
@@ -9,7 +9,7 @@ interface IProps {
   title: string,
 }
 
-const Book = (props: IProps) => {
+const Book = (props: Props) => {
   const {authors, description, image, publisher, publishedDate, title} = props;
 
   return (
