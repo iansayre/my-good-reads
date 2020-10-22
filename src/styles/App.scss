@@ -6,7 +6,7 @@
 
 body {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
-  'Helvetica Neue', Arial, sans-serif;
+    'Helvetica Neue', Arial, sans-serif;
 }
 
 h1,
@@ -111,20 +111,27 @@ form {
 }
 .book {
   border: 1px solid silver;
-  margin-top: .5rem;
+  padding: 0.5rem;
 }
 .book--container {
   display: flex;
   flex-flow: row nowrap;
-  justify-content:space-around;
+  justify-content: space-around;
   align-items: stretch;
+}
+
+.results--container {
+  border: 1px solid silver;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 1rem;
+  padding: 1rem;
+  width: 75%;
 }
 
 .search-params {
   flex-grow: 3;
-
 }
 .sidebar {
   flex-grow: 1;
-
 }

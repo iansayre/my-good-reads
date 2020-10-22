@@ -57,7 +57,7 @@ const BookSearch = () => {
                                 </div>
                             )}
                              {allAvailableBooks && (
-                                <div className=".book--container">
+                                <div className="results--container">
                                     {
                                         allAvailableBooks.items.map((book: BooksItem): JSX.Element => {
                                             const vol = book.volumeInfo;
