@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import { getBooksByType } from "./book-search.service";
-import { AvailableBooks, BooksItem } from './interfaces';
-import { Book } from '../Book';
+import { AvailableBooks, BooksItem, VolumeInfo } from './interfaces';
+import Book from '../Book';
+import ReadingListItem from '../ReadingListItem';
 
 const BookSearch = () => {
     const [bookType, updateBookType] = useState("");
     const [bookTypeToSearch, updateBookTypeToSearch] = useState("");
     const [allAvailableBooks, setAllAvailableBooks] = useState<AvailableBooks>();
+    const [selectedBooks, setSelectedBooks] = useState<VolumeInfo[]>([]);
+
     async function requestBooks() {
         if (bookTypeToSearch) {
             const allBooks = await getBooksByType(bookTypeToSearch);
@@ -20,6 +23,18 @@ const BookSearch = () => {
         }
         getAllBooks();
     }, [bookTypeToSearch]);
+
+    const handleBookClick = (vol: VolumeInfo) => {
+        if (!selectedBooks.some(book => book.title === vol.title)) {
+            setSelectedBooks([...selectedBooks, vol]);
+        }
+    }
+
+    const handleRemoveClick = (vol: VolumeInfo): void => {
+        const newSelectedBoooks = selectedBooks.filter(book => book.title !== vol.title);
+
+        setSelectedBooks(newSelectedBoooks);
+    }
     return (
             <>
                 <div className="book--container">
@@ -61,14 +76,25 @@ const BookSearch = () => {
                                     {
                                         allAvailableBooks.items.map((book: BooksItem): JSX.Element => {
                                             const vol = book.volumeInfo;
+                                            const bId = book.id;
                                             return (
-                                                <Book authors={vol.authors} description={vol.description} image={vol.imageLinks.thumbnail} publisher={vol.publisher} publishedDate={vol.publishedDate} title={vol.title}/>
+                                                <Book key={bId} authors={vol.authors} description={vol.description} handleBookClick={() => handleBookClick(vol)} image={vol.imageLinks.thumbnail} publisher={vol.publisher} publishedDate={vol.publishedDate} title={vol.title}/>
                                             );
                                         })
                                     }
                                 </div>
                             )}
+                            <div className="sidebar">
+                                <div className="reading-list-container">
+                                    <div className="reading-list-counter">
+                                        My Reading List {selectedBooks.length}
+                                    </div>
 
+                                    <div className="reading-list-content">
+                                        {selectedBooks.map(book => (<ReadingListItem key={book.industryIdentifiers[0].identifier} title={book.title} handleRemoveClick={() => handleRemoveClick(book)}/>))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

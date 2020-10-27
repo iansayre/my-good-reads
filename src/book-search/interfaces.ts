@@ -3,7 +3,7 @@ interface IndustryIdentifier {
   identifier: string
 }
 
-interface VolumeInfo {
+export interface VolumeInfo {
   title: string,
   subtitle: string,
   authors: string[],

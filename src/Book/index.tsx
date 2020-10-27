@@ -3,6 +3,7 @@ import React from 'react';
 interface Props {
   authors: string[],
   description: string,
+  handleBookClick: () => void,
   image: string,
   publisher: string,
   publishedDate: string,
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const Book = (props: Props) => {
-  const {authors, description, image, publisher, publishedDate, title} = props;
+  const {authors, description, handleBookClick, image, publisher, publishedDate, title} = props;
 
   return (
     <div className="book">
@@ -24,8 +25,9 @@ const Book = (props: Props) => {
         <span className="date">{publishedDate}</span>
       </div>
       <p className="desc">{description}</p>
+      <button onClick={handleBookClick}/>
     </div>
   );
 };
 
-export { Book };
+export default Book;
